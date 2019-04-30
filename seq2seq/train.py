@@ -35,3 +35,4 @@ if __name__ == '__main__':
     for p in ALL_PERSONALITY:
         logging.info('start training model for %s' % p)
         train_and_save_session(p, sg_model, '../model/seq2seq/%s_model.ckpt' % p)
+        logging.info('Training completed!')

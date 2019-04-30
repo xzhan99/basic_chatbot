@@ -1,3 +1,5 @@
+import logging
+
 from word_embeddings.skipgram_model import WORD_DiMENSION
 import tensorflow as tf
 
@@ -51,17 +53,16 @@ def train_seq2seq_model(enc_input, dec_input, targets, cost, optimizer, input_ba
                            feed_dict={enc_input: input_batch,  # shape(5, 100)
                                       dec_input: output_batch,  # shape(1, 98)
                                       targets: target_batch})  # shape(1, 1)
-        print('Epoch:', '%04d' % (epoch + 1), 'cost =', '{:.6f}'.format(loss))
+        logging.debug('Epoch: {:3d}\tcost = {:.6f}'.format(epoch + 1, loss))
 
-    print('Epoch:', '%04d' % (epoch + 1), 'cost =', '{:.6f}'.format(loss))
-    print('Training completed!')
+    logging.debug('Epoch: {:3d}\tcost = {:.6f}'.format(epoch + 1, loss))
     return sess
 
 
 def save_seq2seq_model(sess, path):
     # save seq model to google drive
     saver = tf.train.Saver()
-    saver.save(sess,  path)
+    saver.save(sess, path)
 
 
 def load_seq2seq_model(path):
@@ -71,6 +72,3 @@ def load_seq2seq_model(path):
     saver = tf.train.Saver()
     saver.restore(sess, path)
     return sess
-
-
-
