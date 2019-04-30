@@ -76,3 +76,7 @@ def build_dataset():
         'professional': prepare_data_by_dataframe(all_df[2])
     }
     return dataset
+
+
+global dataset
+dataset = build_dataset()

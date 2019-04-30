@@ -68,10 +68,3 @@ def make_batch(personality_data, skipgram):
         target_batch.append(target)
 
     return input_batch, output_batch, target_batch
-
-
-# testing: Generate a batch data
-input_batch, output_batch, target_batch = make_batch(dataset['professional'], sg_model)
-print(input_batch[0].shape)
-print(output_batch[0].shape)
-print(target_batch[0].shape)
