@@ -8,4 +8,4 @@ if __name__ == '__main__':
     sg_model = FastText(size=WORD_DiMENSION, window=5, min_count=10, workers=4, sg=1)
     sg_model.build_vocab(sentences)
     sg_model.train(sentences, total_examples=sg_model.corpus_count, epochs=1)
-    sg_model.save('../model/gensim_fasttext.model')
+    sg_model.save('../model/embeddings/gensim_fasttext.model')

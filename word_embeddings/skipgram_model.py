@@ -13,7 +13,6 @@ def read_sentences(path):
     Return: a list that includes well preprocessed sentences
     """
     lemmatizer = WordNetLemmatizer()
-    lines = ''
     with open(path, encoding='iso-8859-1') as file:
         lines = file.readlines()
 
