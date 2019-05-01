@@ -5,7 +5,7 @@ import warnings
 from nltk import WordNetLemmatizer, word_tokenize
 from nltk.corpus import stopwords
 
-from configuration import ROOT_PATH, ALL_PERSONALITY
+from configuration import ROOT_PATH, ALL_PERSONALITY, LOGGING_FORMAT
 from seq2seq.apply_embedding_model import make_batch
 from seq2seq.build_model import load_seq2seq_model, build_seq2seq_model
 from seq2seq.preprocessing import load_preprocessed_data
@@ -14,20 +14,20 @@ import tensorflow as tf
 
 warnings.simplefilter(action='ignore', category=DeprecationWarning)
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format=LOGGING_FORMAT)
 
 
 def load_models():
     """
-    Load word embedding and seq2seq model
+    Load word embedding and seq2seq models
     return: sg_model, sessions
     """
-    # use above function to load embedding model
-    sg_model = load_word_embeddings_model(ROOT_PATH + '/model/embeddings/gensim_fasttext.model')
+    # use above function to load embedding models
+    sg_model = load_word_embeddings_model(ROOT_PATH + '/models/embeddings/gensim_fasttext.models')
     # use above function to load three sequence models
     sessions = {}
     for personality in ALL_PERSONALITY:
-        sessions[personality] = load_seq2seq_model(ROOT_PATH + '/model/seq2seq/%s_model.ckpt' % personality)
+        sessions[personality] = load_seq2seq_model(ROOT_PATH + '/models/seq2seq/%s_model.ckpt' % personality)
     return sg_model, sessions
 
 
@@ -122,7 +122,7 @@ if __name__ == '__main__':
     # initial seq2seq parameters
     enc_input, dec_input, targets, model, cost, optimizer = build_seq2seq_model(
         len(dataset[ALL_PERSONALITY[0]]['answer_dict']))
-    sg_model, sessions = load_models()  # read embeddings and seq model from google drive
+    sg_model, sessions = load_models()  # read embeddings and seq models from google drive
 
     current_personality = 'professional'  # default personality
     question = ''
