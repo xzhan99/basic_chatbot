@@ -2,7 +2,7 @@ import logging
 
 import tensorflow as tf
 
-from configuration import WORD_DiMENSION, LEARNING_RATE, N_HIDDEN, OUTPUT_KEEP_PROB
+from configuration import WORD_DiMENSION, LEARNING_RATE, N_HIDDEN, OUTPUT_KEEP_PROB, TOTAL_EPOCHS
 
 
 def build_seq2seq_model(n_class):
@@ -44,9 +44,8 @@ def build_seq2seq_model(n_class):
 def train_seq2seq_model(enc_input, dec_input, targets, cost, optimizer, input_batch, output_batch, target_batch):
     sess = tf.Session()
     sess.run(tf.global_variables_initializer())
-    total_epoch = 200
 
-    for epoch in range(total_epoch):
+    for epoch in range(TOTAL_EPOCHS):
         _, loss = sess.run([optimizer, cost],
                            feed_dict={enc_input: input_batch,  # shape(5, 100)
                                       dec_input: output_batch,  # shape(1, 98)

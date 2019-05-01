@@ -9,5 +9,6 @@ WORD_DiMENSION = 100  # the amount of float number in every vector
 LEARNING_RATE = 0.002
 N_HIDDEN = 128
 OUTPUT_KEEP_PROB = 0.5
+TOTAL_EPOCHS = 200
 
 LOGGING_FORMAT = '%(asctime)s - %(levelname)s - %(message)s'
