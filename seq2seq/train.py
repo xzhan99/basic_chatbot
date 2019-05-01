@@ -1,13 +1,13 @@
 import logging
 
+from chatbot import ROOT_PATH
+from configuration import ALL_PERSONALITY
 from seq2seq.apply_embedding_model import make_batch
 from seq2seq.build_model import train_seq2seq_model, save_seq2seq_model, build_seq2seq_model
-from seq2seq.preprocessing import dataset
+from seq2seq.preprocessing import build_dataset, save_preprocessed_data
 from word_embeddings.skipgram_model import load_word_embeddings_model
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-ALL_PERSONALITY = ('professional', 'friend', 'comic')
 
 
 def generate_batch_data(personality, embedding_model):
@@ -31,8 +31,12 @@ def train_and_save_session(personality, embedding_model, path):
 
 
 if __name__ == '__main__':
-    sg_model = load_word_embeddings_model('../model/embeddings/gensim_fasttext.model')
+    # data preprocessing
+    logging.info('preforming data preprocessing' % p)
+    dataset = build_dataset()
+    save_preprocessed_data(dataset, ROOT_PATH + '/data/preprocessed_data.json')
+
+    sg_model = load_word_embeddings_model(ROOT_PATH + '/model/embeddings/gensim_fasttext.model')
     for p in ALL_PERSONALITY:
-        logging.info('start training model for %s' % p)
-        train_and_save_session(p, sg_model, '../model/seq2seq/%s_model.ckpt' % p)
-        logging.info('Training completed!')
+        logging.info('training model for %s' % p)
+        train_and_save_session(p, sg_model, ROOT_PATH + '/model/seq2seq/%s_model.ckpt' % p)

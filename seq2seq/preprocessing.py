@@ -1,3 +1,5 @@
+import json
+
 import pandas as pd
 import re
 
@@ -6,6 +8,8 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
 from nltk.stem import WordNetLemmatizer
+
+from configuration import ROOT_PATH
 
 nltk.download('wordnet')
 nltk.download('punkt')
@@ -16,9 +20,9 @@ def read_csv_files():
     """This method reads training data for three personalities from files
     Return: three DataFrame objects, each contains data for one personality
     """
-    df_1 = pd.read_csv('../data/ms_chatbot_dialogs/qna_chitchat_the_comic.tsv', sep="\t")
-    df_2 = pd.read_csv('../data/ms_chatbot_dialogs/qna_chitchat_the_friend.tsv', sep="\t")
-    df_3 = pd.read_csv('../data/ms_chatbot_dialogs/qna_chitchat_the_professional.tsv', sep="\t")
+    df_1 = pd.read_csv(ROOT_PATH + '/data/ms_chatbot_dialogs/qna_chitchat_the_comic.tsv', sep="\t")
+    df_2 = pd.read_csv(ROOT_PATH + '/data/ms_chatbot_dialogs/qna_chitchat_the_friend.tsv', sep="\t")
+    df_3 = pd.read_csv(ROOT_PATH + '/data/ms_chatbot_dialogs/qna_chitchat_the_professional.tsv', sep="\t")
     return df_1, df_2, df_3
 
 
@@ -78,5 +82,12 @@ def build_dataset():
     return dataset
 
 
-global dataset
-dataset = build_dataset()
+def save_preprocessed_data(data, path):
+    with open(path, 'w+') as file:
+        json.dump(data, file)
+
+
+def load_preprocessed_data(path):
+    with open(path, 'r') as file:
+        data = json.load(file)
+    return data

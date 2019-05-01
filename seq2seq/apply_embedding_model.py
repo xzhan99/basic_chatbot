@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 
-from word_embeddings.skipgram_model import WORD_DiMENSION
+from configuration import WORD_DiMENSION
 
 
 def get_vectors_q(sentence, max_amount, skipgram):

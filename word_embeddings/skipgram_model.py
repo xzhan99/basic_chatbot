@@ -3,8 +3,6 @@ import re
 
 from nltk import WordNetLemmatizer
 
-WORD_DiMENSION = 100  # the amount of float number in every vector
-
 
 def read_sentences(path):
     """

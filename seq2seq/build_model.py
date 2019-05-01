@@ -1,7 +1,8 @@
 import logging
 
-from word_embeddings.skipgram_model import WORD_DiMENSION
 import tensorflow as tf
+
+from configuration import WORD_DiMENSION
 
 
 def build_seq2seq_model(n_class):
