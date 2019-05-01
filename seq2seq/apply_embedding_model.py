@@ -1,5 +1,4 @@
 import numpy as np
-import tensorflow as tf
 
 from configuration import WORD_DiMENSION
 
@@ -9,7 +8,7 @@ def get_vectors_q(sentence, max_amount, skipgram):
     This method gets token index vector of questions and add paddings if the word is shorter than the maximum number of words
     Param sentence: tokenized question list
     Param max_amount: maximum number of words in a question
-    Param skipgram: word embedding model
+    Param skipgram: word embedding models
     Return: vectors of question
     """
     diff = max_amount - len(sentence)
