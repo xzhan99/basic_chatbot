@@ -12,7 +12,7 @@ This project is an implementation of a basic (chit-chat) chatbot using Sequence 
             qna_chitchat_the_comic.tsv
             qna_chitchat_the_friend.tsv
             qna_chitchat_the_professional.tsv
-    /model
+    /models
         /embeddings
             ...
         /seq2seq
@@ -27,6 +27,10 @@ This project is an implementation of a basic (chit-chat) chatbot using Sequence 
         __init__.py
         skipgram_model.py
         train.py
+    chatbot.py
+    configuration.py
+    README.md
+    requirements.txt
         
 ## Implementation
 ### Word Embeddings
